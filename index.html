@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b18">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>AI ஜோதிடர் — Professional</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon.svg">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <div class="stars"></div>
+  <div class="nebula n1"></div><div class="nebula n2"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/icon.svg" class="brand-icon" alt="AI ஜோதிடர்">
+      <div><div class="brand-title">AI ஜோதிடர்</div><div class="brand-subtitle">உங்கள் வாழ்க்கைக்கான டிஜிட்டல் ஜோதிடர்</div></div>
+    </div>
+    <button id="langBtn" class="ghost-btn">தமிழ் / English</button>
+  </header>
+
+  <main class="main-content">
+    <section id="view-home" class="view active">
+      <div class="hero-card">
+        <div class="hero-copy">
+          <div class="eyebrow">✦ PERSONAL ASTROLOGY</div>
+          <h1>உங்கள் ஜாதகத்தை<br><span>அறிந்து கொள்ளுங்கள்</span></h1>
+          <p>ராசி, லக்னம், நட்சத்திரம், பாவம், தசா மற்றும் கோச்சாரத்தை ஒரே இடத்தில் பார்க்கலாம்.</p>
+          <button class="primary-btn" data-go="jathagam">ஜாதகம் உருவாக்கு <span>→</span></button>
+        </div>
+        <div class="zodiac-orbit"><div class="orbit r1"></div><div class="orbit r2"></div><b>♈</b><i>☽</i><i>☉</i></div>
+      </div>
+
+      <div class="section-head"><div><small>EXPLORE</small><h2>முக்கிய சேவைகள்</h2></div></div>
+      <div class="service-grid">
+        <button data-go="jathagam" class="service-card"><span>◈</span><b>ஜாதகம்</b><small>ராசி • லக்னம் • பாவம்</small></button>
+        <button data-go="dasha" class="service-card"><span>◉</span><b>தசா & புத்தி</b><small>விம்சோத்தரி காலங்கள்</small></button>
+        <button data-go="transit" class="service-card"><span>☄</span><b>கோச்சாரம்</b><small>தற்போதைய கிரக நிலை</small></button>
+        <button data-go="ai" class="service-card"><span>✦</span><b>AI ஜோதிடர்</b><small>கேள்வி & பதில்</small></button>
+      </div>
+
+      <div class="tip-card"><span>✦</span><div><b>Quick Tip</b><p>பிறந்த நேரம் சரியாக இருந்தால் லக்னம் மற்றும் பாவ கணக்கீடு இன்னும் பயனுள்ளதாக இருக்கும்.</p></div></div>
+    </section>
+
+    <section id="view-jathagam" class="view">
+      <div class="page-title"><small>YOUR CHART</small><h1>ஜாதகம்</h1><p>பிறந்த விவரங்களை உள்ளிட்டு முழு chart உருவாக்குங்கள்.</p></div>
+      <div class="panel">
+        <div class="panel-title"><span>01</span><div><b>பிறந்த விவரங்கள்</b><small>Birth Details</small></div></div>
+        <div class="form-grid">
+          <label>பெயர்<input id="name" placeholder="உங்கள் பெயர்"></label>
+          <label>பிறந்த தேதி<input id="dob" type="date"></label>
+          <label>பிறந்த நேரம்<input id="time" type="time"></label>
+          <label>Time Zone<input id="tz" type="number" step="0.5" value="5.5"></label>
+          <label>Latitude<input id="lat" type="number" step="0.0001" value="13.0827"></label>
+          <label>Longitude<input id="lon" type="number" step="0.0001" value="80.2707"></label>
+        </div>
+        <button id="calc" class="primary-btn full">✦ ஜாதகம் கணக்கிடு</button>
+        <div id="status" class="status-line">தயார் — பிறந்த விவரங்களை உள்ளிடுங்கள்.</div>
+      </div>
+
+      <div id="summary" class="panel hidden">
+        <div class="panel-title"><span>02</span><div><b>முக்கிய குறிப்புகள்</b><small>Chart Summary</small></div></div>
+        <div class="summary-grid">
+          <div><small>லக்னம்</small><strong id="lagna">—</strong></div>
+          <div><small>சந்திர ராசி</small><strong id="moonRasi">—</strong></div>
+          <div><small>நட்சத்திரம்</small><strong id="star">—</strong></div>
+          <div><small>பாதம்</small><strong id="pada">—</strong></div>
+        </div>
+      </div>
+
+      <div id="charts" class="panel hidden">
+        <div class="panel-title"><span>03</span><div><b>ராசி & நவாம்சம்</b><small>South Indian Style</small></div></div>
+        <div class="chart-tabs"><button class="tab active" data-chart="rasi">ராசி</button><button class="tab" data-chart="d9">நவாம்சம் D9</button></div>
+        <div id="chartGrid" class="south-chart"></div>
+      </div>
+
+      <div id="houses" class="panel hidden">
+        <div class="panel-title"><span>04</span><div><b>12 பாவங்கள்</b><small>Whole Sign Houses</small></div></div>
+        <div id="houseGrid" class="house-grid"></div>
+      </div>
+
+      <div id="planets" class="panel hidden">
+        <div class="panel-title"><span>05</span><div><b>கிரக நிலைகள்</b><small>Planet Positions</small></div></div>
+        <div class="table-wrap"><table><thead><tr><th>கிரகம்</th><th>ராசி</th><th>அம்சம்</th><th>நட்சத்திரம்</th></tr></thead><tbody id="planetBody"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="view-dasha" class="view">
+      <div class="page-title"><small>TIMELINE</small><h1>தசா & புத்தி</h1><p>ஜாதகம் கணக்கிட்ட பிறகு உங்கள் காலவரிசை இங்கே வரும்.</p></div>
+      <div id="dasha" class="panel">
+        <div id="currentDasha" class="highlight">முதலில் ஜாதகம் கணக்கிடுங்கள்.</div>
+        <div class="timeline" id="dashaBody"></div>
+      </div>
+    </section>
+
+    <section id="view-transit" class="view">
+      <div class="page-title"><small>GOCHARA</small><h1>கோச்சாரம்</h1><p>தற்போதைய சூரியன் மற்றும் சந்திரன் நிலையை உங்கள் பிறப்பு சந்திர ராசியுடன் ஒப்பிடலாம்.</p></div>
+      <div id="transit" class="panel"><div id="transitText" class="insight">முதலில் ஜாதகம் கணக்கிடுங்கள்.</div></div>
+    </section>
+
+    <section id="view-ai" class="view">
+      <div class="page-title"><small>AI ASTROLOGER</small><h1>AI ஜோதிடர்</h1><p>உங்கள் chart data அடிப்படையில் கேள்விகளை கேட்கும் chat interface.</p></div>
+      <div class="chat-card">
+        <div class="bot-bubble">வணக்கம் ✦ உங்கள் ஜாதகத்தை கணக்கிட்ட பிறகு, திருமணம், வேலை, பணம், குடும்பம் போன்ற கேள்விகளை இங்கே கேட்கலாம்.</div>
+        <div id="aiText" class="ai-insight"><p>இன்னும் chart data இல்லை.</p></div>
+        <div class="suggestions"><button data-q="என் தொழில் எப்படி இருக்கும்?">💼 தொழில்</button><button data-q="திருமண காலம் எப்படி?">💍 திருமணம்</button><button data-q="பணம் பற்றி சொல்லுங்கள்">💰 பணம்</button></div>
+        <div class="chat-input"><input id="aiInput" placeholder="உங்கள் கேள்வியை எழுதுங்கள்..."><button id="aiSend">↑</button></div>
+      </div>
+    </section>
+
+    <section id="view-profile" class="view">
+      <div class="page-title"><small>MY SPACE</small><h1>Profile</h1><p>உங்கள் பெயர் மற்றும் கடைசி chart-ஐ இந்த device-ல் சேமிக்கலாம்.</p></div>
+      <div class="profile-card">
+        <div class="profile-avatar">✦</div>
+        <div><b id="profileName">Guest User</b><small id="profileMeta">Saved locally on this device</small></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><span>★</span><div><b>Saved Jathagam</b><small>உள்ளூர் சேமிப்பு</small></div></div>
+        <p id="savedText" class="muted">இன்னும் எந்த ஜாதகமும் சேமிக்கப்படவில்லை.</p>
+        <button id="clearSaved" class="danger-btn">சேமித்த தகவலை அழி</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-go="home"><span>⌂</span><small>முகப்பு</small></button>
+    <button class="nav-item" data-go="jathagam"><span>◈</span><small>ஜாதகம்</small></button>
+    <button class="nav-item" data-go="dasha"><span>◉</span><small>தசா</small></button>
+    <button class="nav-item" data-go="ai"><span>✦</span><small>AI</small></button>
+    <button class="nav-item" data-go="profile"><span>○</span><small>Profile</small></button>
+  </nav>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

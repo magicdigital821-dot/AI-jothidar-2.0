@@ -1,0 +1,21 @@
+{
+  "name": "AI ஜோதிடர்",
+  "short_name": "AI ஜோதிடர்",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#080b18",
+  "theme_color": "#080b18",
+  "description": "தமிழ் AI ஜோதிடர் — ஜாதகம், நவாம்சம், தசா மற்றும் கோச்சாரம்",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
