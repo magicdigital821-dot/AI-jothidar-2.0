@@ -10,8 +10,7 @@
   },
   "dependencies": {
     "@capacitor/core": "latest",
-    "@capacitor/android": "latest",
-    "astronomy-engine": "2.1.19"
+    "@capacitor/android": "latest"
   },
   "devDependencies": {
     "@capacitor/cli": "latest"
