@@ -31,6 +31,16 @@ jobs:
       - name: Install TypeScript
         run: npm install -D typescript
 
+      - name: Prepare web files
+        run: |
+          mkdir -p www
+          cp index.html www/
+          cp style.css www/
+          cp app.js www/
+          cp manifest.json www/
+          cp sw.js www/
+          cp -r assets www/
+
       - name: Add Android platform
         run: npx cap add android
 
