@@ -3,8 +3,7 @@ name: Build Android APK
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build:
@@ -33,13 +32,10 @@ jobs:
 
       - name: Prepare web files
         run: |
-          mkdir -p www
-          cp index.html www/
-          cp style.css www/
-          cp app.js www/
-          cp manifest.json www/
-          cp sw.js www/
-          cp -r assets www/
+          mkdir -p www/assets
+          cp index.html style.css app.js manifest.json sw.js www/
+          cp icon-192.png icon-512.png icon.svg www/assets/ 2>/dev/null || true
+          cp icon-192.png icon-512.png icon.svg www/ 2>/dev/null || true
 
       - name: Add Android platform
         run: npx cap add android
