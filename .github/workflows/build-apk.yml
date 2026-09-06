@@ -27,7 +27,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
+- name: Install TypeScript
+  run: npm install -D typescript
       - name: Add Android platform
         run: npx cap add android
 
