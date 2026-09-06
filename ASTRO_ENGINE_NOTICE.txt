@@ -1,0 +1,15 @@
+AI ஜோதிடர் v0.9 — calculation engine notes
+
+Astronomy Engine 2.1.19 is bundled into the Android web assets at build time.
+License: MIT. Copyright (c) 2019-2025 Don Cross.
+Source: https://github.com/cosinekitty/astronomy
+
+Jyotish convention in this build:
+- Tropical geocentric apparent ecliptic positions -> Lahiri/Chitrapaksha sidereal conversion
+- Mean Rahu / Ketu
+- Whole-sign houses
+- Lagna from GAST + longitude and true obliquity
+- Nakshatra / pada from Moon longitude
+- Vimshottari Mahadasha display from Moon nakshatra
+
+The calculation layer is deterministic and runs inside the app; it does not require a remote astrology API.

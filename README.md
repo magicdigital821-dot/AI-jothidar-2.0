@@ -51,3 +51,8 @@ Node.js + Android Studio உள்ள computer-ல்:
 
 ## Phone-only APK build
 See `PHONE_TO_APK.md`. GitHub Actions workflow: `.github/workflows/build-apk.yml`.
+
+
+## v0.9 Real Jathagam Engine
+
+This version bundles Astronomy Engine during the GitHub Actions build instead of loading it from a remote CDN at runtime. Planet positions use geocentric apparent vectors, Lahiri/Chitrapaksha sidereal conversion, Mean Rahu/Ketu, Whole-Sign houses, and a GAST-based Lagna calculation. Calculation errors are shown in the app status area.

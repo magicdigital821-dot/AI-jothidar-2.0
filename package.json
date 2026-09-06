@@ -1,6 +1,6 @@
 {
   "name": "ai-jothidar",
-  "version": "0.7.0",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "web": "python -m http.server 8080",
@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@capacitor/core": "latest",
-    "@capacitor/android": "latest"
+    "@capacitor/android": "latest",
+    "astronomy-engine": "2.1.19"
   },
   "devDependencies": {
     "@capacitor/cli": "latest"
