@@ -5,3 +5,6 @@ Planetary positions are calculated locally using a compact low-precision orbital
 then converted to Lahiri/Chitrapaksha sidereal longitude. The app is intended as a
 working MVP engine and should be validated against a reference ephemeris before
 publishing production-grade astrological results.
+
+
+v1.1 fix: the offline engine is embedded directly into app.js so the Android WebView does not depend on loading astro_engine.js separately.
