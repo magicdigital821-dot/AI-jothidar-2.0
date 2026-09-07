@@ -154,6 +154,71 @@ function calc(){
   }
 }
 function render(){
+  let aiHistory=[];
+
+function appendChat(role,text){
+  const box=$("aiText");
+  const cls=role==="user"?"user-msg":"assistant-msg";
+  const label=role==="user"?"நீங்கள்":"AI ஜோதிடர்";
+
+  const el=document.createElement("div");
+  el.className="chat-msg "+cls;
+  el.innerHTML=`<div class="chat-label">${label}</div><div class="chat-msg-body"></div>`;
+  el.querySelector(".chat-msg-body").textContent=text;
+
+  box.appendChild(el);
+  box.scrollTop=box.scrollHeight;
+}
+
+async function sendAIQuestion(){
+  const q=$("aiQuestion").value.trim();
+  if(!q) return;
+
+  if(!state){
+    alert("முதலில் உங்கள் ஜாதகத்தை கணக்கிடுங்கள்.");
+    return;
+  }
+
+  const apiUrl=(window.AI_JOTHIDAR_CONFIG&&window.AI_JOTHIDAR_CONFIG.apiUrl)||"";
+
+  if(!apiUrl || apiUrl.includes("YOUR-WORKER-NAME")){
+    appendChat("assistant","AI Chat backend இன்னும் இணைக்கப்படவில்லை.");
+    return;
+  }
+
+  appendChat("user",q);
+  $("aiQuestion").value="";
+
+  aiHistory.push({role:"user",text:q});
+
+  try{
+    const response=await fetch(apiUrl,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        message:q,
+        history:aiHistory.slice(-12),
+        chart:chartContext()
+      })
+    });
+    const data=await response.json().catch(()=>({}));
+
+    if(!response.ok){
+      throw new Error(data.error||("HTTP "+response.status));
+    }
+
+    const answer=String(data.answer||"பதில் கிடைக்கவில்லை.");
+
+    aiHistory.push({role:"assistant",text:answer});
+    appendChat("assistant",answer);
+
+  }catch(err){
+    console.error("AI chat error",err);
+    appendChat("assistant",
+      "AI சேவையை இப்போது தொடர்புகொள்ள முடியவில்லை. Internet அல்லது backend அமைப்பைச் சரிபார்க்கவும்."
+    );
+  }
+}
   ["summary","charts","houses","planets"].forEach(id=>$(id).classList.remove("hidden"));
   setStatus("கணக்கீடு முடிந்தது ✓");
   $("lagna").textContent=RASHIS[rasi(state.lag)][0]+" "+RASHIS[rasi(state.lag)][2];
