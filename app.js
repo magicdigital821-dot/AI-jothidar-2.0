@@ -154,22 +154,6 @@ function calc(){
   }
 }
 function render(){
-  let aiHistory=[];
-
-function appendChat(role,text){
-  const box=$("aiText");
-  const cls=role==="user"?"user-msg":"assistant-msg";
-  const label=role==="user"?"நீங்கள்":"AI ஜோதிடர்";
-
-  const el=document.createElement("div");
-  el.className="chat-msg "+cls;
-  el.innerHTML=`<div class="chat-label">${label}</div><div class="chat-msg-body"></div>`;
-  el.querySelector(".chat-msg-body").textContent=text;
-
-  box.appendChild(el);
-  box.scrollTop=box.scrollHeight;
-}
-
 async function sendAIQuestion(){
   const q=$("aiQuestion").value.trim();
   if(!q) return;
