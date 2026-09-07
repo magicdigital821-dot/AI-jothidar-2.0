@@ -190,7 +190,33 @@ function renderTransit(){
   $("transitText").innerHTML=`இன்று சந்திரன் <strong>${RASHIS[mr][0]}</strong> ராசியிலும், சூரியன் <strong>${RASHIS[sr][0]}</strong> ராசியிலும் உள்ளது. உங்கள் பிறப்பு சந்திர ராசியிலிருந்து சந்திரன் <strong>${from+1}ம் இடத்தில்</strong> உள்ளது.`;
 }
 function renderAI(){
-  $("aiText").innerHTML=`<p><strong>Chart Snapshot:</strong> லக்னம் ${RASHIS[rasi(state.lag)][0]}, சந்திர ராசி ${RASHIS[rasi(state.moon)][0]}, ${NAK[state.ni.i][0]} நட்சத்திரம், ${state.ni.p}ம் பாதம்.</p><p>இது ஒரு rule-based ஆரம்ப விளக்கம். அடுத்த production கட்டத்தில் structured chart data-க்கு உண்மையான AI backend இணைக்கலாம்.</p>`;
+ function renderAI(){
+  const el = $("aiText");
+  if(!el) return;
+
+  el.innerHTML = `
+    <p><strong>Chart Snapshot:</strong>
+    லக்னம் ${RASHIS[rasi(state.lag)][0]},
+    சந்திர ராசி ${RASHIS[rasi(state.moon)][0]},
+    ${NAK[state.ni.i][0]} நட்சத்திரம்,
+    ${state.ni.p}ம் பாதம்.</p>
+
+    <p>உங்கள் ஜாதகத் தகவல் தயாராக உள்ளது. கீழே உங்கள் கேள்வியை கேளுங்கள்.</p>
+
+    <div class="chat-box">
+      <div id="chatMessages"></div>
+
+      <div class="chat-input-row">
+        <input id="aiQuestion" type="text"
+          placeholder="உதாரணம்: என் தொழில் எப்படி இருக்கும்?">
+        <button onclick="sendAIQuestion()">கேள்</button>
+      </div>
+    </div>
+  `;
+
+  appendChat("assistant",
+    "வணக்கம்! ✦ உங்கள் ஜாதகத்தை அடிப்படையாக வைத்து கேள்விகளுக்கு விளக்கம் தருகிறேன். உங்கள் கேள்வியை கேளுங்கள்."
+  );
 }
 function updateProfile(){
   const raw=localStorage.getItem("aiJothidarLast");if(!raw)return;
